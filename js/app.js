@@ -100,16 +100,17 @@ const countIO = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.6 });
 
-/* ─────────────────────────────────────────── Heat dots */
+/* ─────────────────────────────────────────── Heat rating: up to four chillies */
 const heatDots = (n, cls = '') =>
   `<span class="heat ${cls}" title="Heat ${n} of 4" aria-label="Heat level ${n} of 4">` +
-  [0, 1, 2, 3].map(i => `<i class="${i < n ? 'on' : ''}"></i>`).join('') +
+  [0, 1, 2, 3].map(i => `<svg viewBox="0 0 64 64" class="${i < n ? 'on' : ''}" aria-hidden="true"><use href="#i-chilli"/></svg>`).join('') +
   `</span>`;
 
 /* ─────────────────────────────────────────── Signature cards */
-$('#signatureCards').innerHTML = SIGNATURES.map(s => `
+$('#signatureCards').innerHTML = SIGNATURES.map((s, i) => `
   <article class="card">
     <div class="card__media">
+      <span class="card__n">${String(i + 1).padStart(2, '0')}</span>
       <img src="${esc(s.img)}" alt="${esc(s.alt)}" loading="lazy" decoding="async" width="800" height="600" />
       <span class="card__tag">${esc(s.tag)}</span>
     </div>
@@ -120,8 +121,7 @@ $('#signatureCards').innerHTML = SIGNATURES.map(s => `
         <span class="card__from"><small>From</small>${money(s.from)}</span>
         ${heatDots(s.heat, 'heat--lg')}
         <a class="card__go" href="#menu" data-jump="${s.jump}" aria-label="See ${esc(s.name)} on the menu">
-          On the menu
-          <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg>
+          <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg>
         </a>
       </div>
     </div>
