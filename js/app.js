@@ -14,16 +14,8 @@ const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ─────────────────────────────────────────── Preloader */
-window.addEventListener('load', () => {
-  setTimeout(() => $('#preloader').classList.add('is-done'), reduced ? 0 : 450);
-});
-
-/* ─────────────────────────────────────────── Hero word stagger */
-$$('.hero__title .word').forEach((w, i) => w.style.setProperty('--i', i));
-
 /* ─────────────────────────────────────────── Reveal on scroll */
-const revealables = '.reveal, .card, .jar, .contact, .story__points li, .shelf__item';
+const revealables = '.reveal, .card, .contact, .shelf__item';
 function armReveal(root = document) {
   $$(revealables, root).forEach(el => {
     if (el.hasAttribute('data-rev')) return;
@@ -71,23 +63,9 @@ const spyIO = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '-45% 0px -50% 0px' });
 
-/* ─────────────────────────────────────────── Scroll loop (progress, parallax, chrome) */
+/* ─────────────────────────────────────────── Scroll loop (progress, chrome) */
 const toTop = $('#toTop');
 let ticking = false;
-
-/* Parallax positions are measured ONCE (and on resize), never per frame.
-   Reading getBoundingClientRect() inside the scroll handler forces a layout
-   on every frame, and because the rect already includes the transform we
-   just wrote, the offset compounds into itself. Cache the untransformed
-   document offset instead and derive everything from scrollY. */
-let parallax = [];
-function measureParallax() {
-  parallax = $$('[data-parallax]').map(el => {
-    el.style.transform = '';
-    const r = el.getBoundingClientRect();
-    return { el, factor: +el.dataset.parallax || 0, mid: r.top + window.scrollY + r.height / 2 };
-  });
-}
 
 function onScroll() {
   const y = window.scrollY;
@@ -97,26 +75,10 @@ function onScroll() {
   nav.classList.toggle('is-stuck', y > 24);
   navProgress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
   toTop.classList.toggle('is-on', y > vh * 0.9);
-
-  if (!reduced) {
-    const centre = y + vh / 2;
-    for (const p of parallax) {
-      const offset = p.mid - centre;
-      // skip anything well outside the viewport — nothing to see, no work to do
-      if (offset > vh * 1.5 || offset < -vh * 1.5) continue;
-      p.el.style.transform = `translate3d(0, ${(-offset * p.factor).toFixed(1)}px, 0)`;
-    }
-  }
   ticking = false;
 }
 window.addEventListener('scroll', () => {
   if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
-}, { passive: true });
-
-let resizeT;
-window.addEventListener('resize', () => {
-  clearTimeout(resizeT);
-  resizeT = setTimeout(() => { measureParallax(); onScroll(); }, 150);
 }, { passive: true });
 
 toTop.addEventListener('click', () =>
@@ -150,15 +112,16 @@ $('#signatureCards').innerHTML = SIGNATURES.map(s => `
     <div class="card__media">
       <img src="${esc(s.img)}" alt="${esc(s.alt)}" loading="lazy" decoding="async" width="800" height="600" />
       <span class="card__tag">${esc(s.tag)}</span>
-      <h3 class="card__name">${esc(s.name)}</h3>
     </div>
     <div class="card__body">
+      <h3 class="card__name">${esc(s.name)}</h3>
       <p class="card__desc">${esc(s.desc)}</p>
       <div class="card__foot">
         <span class="card__from"><small>From</small>${money(s.from)}</span>
         ${heatDots(s.heat, 'heat--lg')}
         <a class="card__go" href="#menu" data-jump="${s.jump}" aria-label="See ${esc(s.name)} on the menu">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          On the menu
+          <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg>
         </a>
       </div>
     </div>
@@ -303,7 +266,9 @@ $$('.filters .chip').forEach(chip => {
 function jumpTo(id) {
   const el = $('#sec-' + id);
   if (!el) return;
-  const top = el.getBoundingClientRect().top + window.scrollY - (74 + 72);
+  // clear the sticky nav and the sticky section rail, measured rather than hard-coded
+  const offset = nav.offsetHeight + $('.railwrap').offsetHeight + 12;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
   window.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' });
 }
 
@@ -624,9 +589,6 @@ spySections.forEach(id => { const el = $('#' + id); if (el) spyIO.observe(el); }
 $$('.msec').forEach(s => railIO.observe(s));
 $$('.count').forEach(el => countIO.observe(el));
 renderTray();
-measureParallax();
 onScroll();
-/* images settling can shift the page — re-measure once everything has loaded */
-window.addEventListener('load', () => { measureParallax(); onScroll(); });
 
 })();

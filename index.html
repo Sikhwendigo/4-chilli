@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>4 Chilli · Durban-Style Curry, Breyani &amp; Bunny Chows · Garsfontein</title>
 <meta name="description" content="4 Chilli — Durban-style curries, breyanis and bunny chows plus a full Indian grocery store in Garsfontein, Pretoria. WhatsApp orders on 083 786 4410. Collection only." />
-<meta name="theme-color" content="#17100c" />
+<meta name="theme-color" content="#0b0908" />
 
 <meta property="og:type" content="restaurant" />
 <meta property="og:title" content="4 Chilli · Durban Curry Co." />
 <meta property="og:description" content="Slow-cooked mutton curry, breyani and proper bunny chows. Garsfontein, Pretoria." />
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23c8202b'/%3E%3Cpath d='M34 14c12 2 20 12 18 24-2 12-13 20-25 19-6-.5-11-3-15-7-1.4-1.4-.4-3.8 1.6-3.6 11.4 1.2 20.4-2.4 25.4-10.4 4-6.4 3-15-5-22z' fill='%23f6ead4'/%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23e5372a'/%3E%3Cpath d='M34 14c12 2 20 12 18 24-2 12-13 20-25 19-6-.5-11-3-15-7-1.4-1.4-.4-3.8 1.6-3.6 11.4 1.2 20.4-2.4 25.4-10.4 4-6.4 3-15-5-22z' fill='%23f6f2ee'/%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo+Black&family=Kaushan+Script&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <link rel="stylesheet" href="styles.css" />
 
@@ -39,60 +39,39 @@
 </head>
 <body>
 
-<!-- ══ SVG sprite ══ -->
+<!-- Icon sprite: the chilli is reused by the empty order tray and the sent notice -->
 <svg class="sprite" aria-hidden="true" focusable="false">
   <symbol id="i-chilli" viewBox="0 0 64 64">
     <path d="M25.5 20.5c-4.6 11-2.4 25.4 8.2 36.4 9.8-11.6 11.4-26 6.6-36.6-3.9-3.6-10.6-3.6-14.8.2Z"/>
     <path d="M33 19c-1-6 1.8-10.6 7.4-12.2 2.4-.7 4.6-.3 6.4 1" fill="none" stroke="currentColor" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  <symbol id="i-swoosh" viewBox="0 0 220 14" preserveAspectRatio="none">
-    <path d="M3 9.5C55 3.5 118 2.5 217 6" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+  <symbol id="i-arrow" viewBox="0 0 24 24">
+    <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
 </svg>
-
-<!-- ══ Preloader ══ -->
-<div class="preloader" id="preloader" aria-hidden="true">
-  <span class="mark mark--stack mark--xl">
-    <img class="mark__chilli" src="img/chillies.png" alt="" width="111" height="220" />
-    <span class="mark__type">
-      <span class="mark__num">4</span>
-      <span class="mark__word">Chilli</span>
-      <span class="mark__style">Durban Style</span>
-      <span class="mark__sub">Indian Take Away &amp; Spicebar</span>
-      <span class="mark__since">Since 2011</span>
-    </span>
-    <img class="mark__chilli mark__chilli--green" src="img/chillies-green.png" alt="" width="148" height="234" />
-  </span>
-</div>
 
 <a class="skip-link" href="#menu">Skip to menu</a>
 
 <!-- ══ Navigation ══ -->
 <header class="nav" id="nav">
   <div class="nav__progress" id="navProgress"></div>
-  <div class="nav__inner">
-
-    <a href="#top" class="mark" aria-label="4 Chilli — home">
-      <img class="mark__chilli" src="img/chillies.png" alt="" width="111" height="220" />
-      <span class="mark__type">
-        <span class="mark__word">4 Chilli</span>
-        <span class="mark__tag"><em>Durban Style</em> Indian Take Away</span>
-        <span class="mark__since">Since 2011</span>
-      </span>
+  <div class="nav__inner wrap">
+    <a href="#top" class="brand" aria-label="4 Chilli — home">
+      <img class="brand__chilli" src="img/chillies.png" alt="" width="111" height="220" />
+      <span class="brand__word">4 Chilli</span>
+      <span class="brand__tag">Durban Style</span>
     </a>
 
     <nav class="nav__links" id="navLinks" aria-label="Primary">
       <a href="#signatures" data-nav>Signatures</a>
       <a href="#menu" data-nav>Menu</a>
-      <a href="#story" data-nav>Our Story</a>
+      <a href="#story" data-nav>Our story</a>
       <a href="#visit" data-nav>Visit</a>
-      <a class="btn btn--tag nav__cta" href="tel:+27127717863">
-        <span class="btn__dot"></span> 012 771 7863
-      </a>
+      <a class="btn btn--primary btn--sm nav__cta" href="tel:+27127717863">Call 012 771 7863</a>
     </nav>
 
     <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
-      <span></span><span></span><span></span>
+      <span></span><span></span>
     </button>
   </div>
 </header>
@@ -101,140 +80,103 @@
 
 <!-- ══ Hero ══ -->
 <section class="hero">
-  <div class="hero__wash" data-parallax="0.14" aria-hidden="true"></div>
-  <svg class="hero__watermark" viewBox="0 0 64 64" aria-hidden="true" data-parallax="0.06"><use href="#i-chilli"/></svg>
-  <div class="hero__grain" aria-hidden="true"></div>
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <p class="pill reveal">
+        <span class="pill__star" aria-hidden="true">★</span>
+        Best of Pretoria Bunny Chow 2025 — Winner
+      </p>
 
-  <div class="hero__inner">
-    <p class="eyebrow reveal">
-      <span class="eyebrow__pip"></span>
-      Garsfontein, Pretoria East · Since 2011
-    </p>
+      <h1 class="hero__title reveal">Durban curry,<br /><span class="accent">made properly.</span></h1>
 
-    <p class="award reveal">
-      <span class="award__star" aria-hidden="true">★</span>
-      <span>
-        <b>Best of Pretoria Bunny Chow 2025 — Winner</b>
-        2026 nominee for Best Bunny Chow &amp; Spice Shop
+      <p class="hero__lead reveal">
+        Mutton on the bone that falls apart. Basmati breyani cooked down slow.
+        A bunny chow in a real hollow loaf. Made to order in Garsfontein, Pretoria, since 2011.
+      </p>
+
+      <div class="hero__actions reveal">
+        <a class="btn btn--primary btn--lg" href="#menu">
+          Explore the menu
+          <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+        <a class="btn btn--ghost btn--lg" href="https://wa.me/27837864410" target="_blank" rel="noopener">WhatsApp an order</a>
+      </div>
+
+      <dl class="stats reveal">
+        <div><dt>Curry dishes</dt><dd><span class="count" data-count="60">0</span>+</dd></div>
+        <div><dt>Cooked to order</dt><dd>100%</dd></div>
+        <div><dt>Vegan options</dt><dd><span class="count" data-count="14">0</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="hero__media reveal" aria-hidden="true">
+      <img class="hero__img hero__img--main" src="img/curry-rice.jpg" alt="" width="1000" height="750" fetchpriority="high" />
+      <img class="hero__img" src="img/bunny-chow.jpg" alt="" width="1000" height="750" />
+      <img class="hero__img" src="img/breyani.jpg" alt="" width="1000" height="750" />
+      <span class="hero__badge">
+        <b>2026 nominee</b>
+        Best Bunny Chow &amp; Spice Shop
       </span>
-    </p>
-
-    <h1 class="hero__title">
-      <span class="line"><span class="word slab">Slow</span> <span class="word slab">cooked.</span></span>
-      <span class="line line--script"><span class="word script">Properly spiced.</span></span>
-      <span class="line"><span class="word slab outline">Always</span> <span class="word slab outline">fresh.</span></span>
-    </h1>
-
-    <p class="hero__lead reveal">
-      Mutton on the bone that falls apart. Basmati breyani cooked down slow.
-      A bunny chow in a real hollow loaf. This is Durban curry, made in Pretoria,
-      the way it's meant to taste.
-    </p>
-
-    <div class="hero__actions reveal">
-      <a class="btn btn--flame btn--lg" href="#menu">
-        Explore the menu
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <a class="btn btn--ghost btn--lg" href="https://wa.me/27837864410" target="_blank" rel="noopener">
-        WhatsApp&nbsp;an order
-      </a>
-    </div>
-
-    <dl class="hero__stats reveal">
-      <div><dt>Curry dishes</dt><dd><span class="count" data-count="60">0</span>+</dd></div>
-      <div><dt>Cooked to order</dt><dd>100<span class="unit">%</span></dd></div>
-      <div><dt>Vegan options</dt><dd><span class="count" data-count="14">0</span></dd></div>
-    </dl>
-  </div>
-
-  <div class="hero__heat" aria-hidden="true">
-    <span class="hero__heat-label">Heat scale</span>
-    <div class="heatbars">
-      <i style="--d:0s"></i><i style="--d:.12s"></i><i style="--d:.24s"></i><i style="--d:.36s"></i>
     </div>
   </div>
-
-  <a href="#signatures" class="hero__scroll" aria-label="Scroll down">
-    <span class="hero__scroll-line"></span>
-  </a>
 </section>
 
-<!-- ══ Marquee ══ -->
-<div class="ticker" aria-hidden="true">
-  <div class="ticker__track">
-    <span class="ticker__award">★ Best of Pretoria Bunny Chow 2025 — Winner</span><i class="tk"><svg viewBox="0 0 64 64"><use href="#i-chilli"/></svg></i>
-    <span>Mutton Breyani</span><i class="tk"><svg viewBox="0 0 64 64"><use href="#i-chilli"/></svg></i>
-    <span>Bunny Chow</span><i class="tk"><svg viewBox="0 0 64 64"><use href="#i-chilli"/></svg></i>
-    <span class="ticker__award">★ 2026 Nominee — Best Bunny Chow &amp; Spice Shop</span><i class="tk"><svg viewBox="0 0 64 64"><use href="#i-chilli"/></svg></i>
-    <span>Butter Chicken</span><i class="tk"><svg viewBox="0 0 64 64"><use href="#i-chilli"/></svg></i>
-    <span>Masala Chips</span><i class="tk"><svg viewBox="0 0 64 64"><use href="#i-chilli"/></svg></i>
-    <span>Mutton CHEEZA</span><i class="tk"><svg viewBox="0 0 64 64"><use href="#i-chilli"/></svg></i>
-    <span>Roti Rolls</span><i class="tk"><svg viewBox="0 0 64 64"><use href="#i-chilli"/></svg></i>
-    <span>Hot Samoosas</span><i class="tk"><svg viewBox="0 0 64 64"><use href="#i-chilli"/></svg></i>
-    <span>Dhall &amp; Rice</span><i class="tk"><svg viewBox="0 0 64 64"><use href="#i-chilli"/></svg></i>
-  </div>
-</div>
-
 <!-- ══ Quick actions ══ -->
-<section class="quickrow" aria-label="Quick actions">
-  <div class="wrap quickrow__grid">
+<section class="quick" aria-label="Quick actions">
+  <div class="wrap quick__grid">
     <a class="qa reveal" href="#menu">
       <span class="qa__k">Menu</span>
       <span class="qa__t">Curries, breyanis &amp; bunny chows</span>
-      <span class="qa__go" aria-hidden="true">→</span>
+      <svg class="qa__go" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg>
     </a>
     <a class="qa reveal" href="https://wa.me/27837864410" target="_blank" rel="noopener">
       <span class="qa__k">WhatsApp</span>
       <span class="qa__t">Build an order, send it to the kitchen</span>
-      <span class="qa__go" aria-hidden="true">→</span>
+      <svg class="qa__go" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg>
     </a>
     <a class="qa reveal" href="#grocery">
       <span class="qa__k">Grocery</span>
       <span class="qa__t">Spices, masalas, pickles &amp; fresh produce</span>
-      <span class="qa__go" aria-hidden="true">→</span>
+      <svg class="qa__go" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg>
     </a>
     <a class="qa reveal" href="#visit">
       <span class="qa__k">Find us</span>
-      <span class="qa__t">Jacqueline Drive, Garsfontein</span>
-      <span class="qa__go" aria-hidden="true">→</span>
+      <span class="qa__t">418 Jacqueline Drive, Garsfontein</span>
+      <svg class="qa__go" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg>
     </a>
   </div>
 </section>
 
 <!-- ══ Signatures ══ -->
-<section class="section signatures" id="signatures">
+<section class="section" id="signatures">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow reveal"><span class="eyebrow__pip"></span> The house favourites</p>
-      <h2 class="sec-title reveal">
-        Six plates we're
-        <span class="u">known for<svg class="swoosh" viewBox="0 0 220 14" preserveAspectRatio="none"><use href="#i-swoosh"/></svg></span>
-      </h2>
-      <p class="sec-sub reveal">Every curry is prepared Durban-style — the masala is roasted, the meat goes in raw, and it cooks down slow until the gravy is thick enough to hold a roti.</p>
+      <p class="eyebrow reveal">The house favourites</p>
+      <h2 class="sec-title reveal">Six plates we're known for</h2>
+      <p class="sec-sub reveal">Every curry is prepared Durban-style: the masala is roasted, the meat goes in raw, and it cooks down slow until the gravy is thick enough to hold a roti.</p>
     </header>
 
     <div class="cards" id="signatureCards"><!-- rendered by app.js --></div>
   </div>
 </section>
 
-<!-- ══ Menu (cream paper) ══ -->
-<section class="section menu paper" id="menu">
+<!-- ══ Menu ══ -->
+<section class="section section--alt menu" id="menu">
   <div class="wrap">
-    <header class="menu__masthead">
-      <span class="rule"></span>
-      <p class="menu__stamp reveal">Effective 01 June 2026 · Prices incl. VAT</p>
-      <h2 class="sec-title menu__title reveal">The <span class="script">full</span> menu</h2>
-      <p class="sec-sub reveal">Tap any price to build your order — we'll turn it into a WhatsApp message you can send straight to the kitchen. Collection only, no deliveries.</p>
-      <span class="rule"></span>
+    <header class="sec-head sec-head--split">
+      <div>
+        <p class="eyebrow reveal">Effective 01 June 2026 · Prices incl. VAT</p>
+        <h2 class="sec-title reveal">The full menu</h2>
+      </div>
+      <p class="sec-sub reveal">Tap any price to add it to your order. We'll turn it into a WhatsApp message you can send straight to the kitchen. Collection only, no deliveries.</p>
     </header>
 
     <div class="menu-controls reveal" id="menuControls">
-      <div class="search">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input type="search" id="menuSearch" placeholder="Search the menu… try “mutton”" aria-label="Search menu" autocomplete="off" />
+      <label class="search">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="menuSearch" placeholder="Search the menu, e.g. mutton" aria-label="Search menu" autocomplete="off" />
         <button type="button" class="search__clear" id="searchClear" aria-label="Clear search" hidden>×</button>
-      </div>
+      </label>
       <div class="filters" role="group" aria-label="Dietary filters">
         <button class="chip is-active" data-diet="all">Everything</button>
         <button class="chip" data-diet="meat">Meat</button>
@@ -247,83 +189,86 @@
       <div class="rail" id="menuRail" role="tablist" aria-label="Menu sections"></div>
     </div>
 
-    <p class="menu-hint reveal">
-      <span class="menu-hint__plus" aria-hidden="true">+</span>
-      Tap a price to add that size to your order
-    </p>
+    <div class="legend reveal">
+      <span><i class="dot dot--meat"></i> Meat</span>
+      <span><i class="dot dot--veg"></i> Vegetarian</span>
+      <span><i class="dot dot--vegan"></i> Vegan</span>
+      <span class="legend__add"><i aria-hidden="true">+</i> Tap a price to add it</span>
+    </div>
 
     <div class="menu-body" id="menuBody"><!-- rendered by app.js --></div>
 
-    <p class="menu-foot reveal">
-      Mutton can be substituted with lamb, subject to availability. All prices include VAT.
-    </p>
+    <p class="menu-foot">Mutton can be substituted with lamb, subject to availability. All prices include VAT.</p>
   </div>
 </section>
 
 <!-- ══ Story ══ -->
-<section class="section story" id="story">
+<section class="section" id="story">
   <div class="wrap story__grid">
     <div class="story__copy">
-      <p class="eyebrow reveal"><span class="eyebrow__pip"></span> Our story</p>
-      <h2 class="sec-title reveal">Durban recipes,<br /><span class="script">Pretoria East kitchen</span></h2>
-      <p class="reveal">4 Chilli Indian Takeaway was founded in 2011 to address a distinct culinary gap: the absence of authentic, traditional Durban-style curry, masalas and Indian spice in Pretoria East. Rejecting mass-produced, commercial alternatives, our mission was to deliver a genuine Durban-style experience — cooking with meticulously roasted masalas and spices, fresh rotis, a variety of samoosas and, definitely, the bunny chows.</p>
-      <p class="reveal">Located at 418 Jacqueline Drive, Garsfontein, our establishment operates strictly on a made-to-order philosophy. While this artisanal approach requires a brief preparation period, it ensures that every dish is served with optimal flavour, freshness and quality, entirely free from the degradation of heat lamps. Our samoosas are freshly fried and served immediately.</p>
-      <p class="reveal">Additionally, we maintain a consistent inventory of premium masalas, authentic spices and high-quality frozen foods, ensuring our complete product range is always available to our customers.</p>
-      <ul class="story__points">
-        <li class="reveal"><b>Cooked to order</b><span>Nothing pre-plated, nothing reheated.</span></li>
-        <li class="reveal"><b>Take away only</b><span>WhatsApp or call ahead, then collect. We don't deliver.</span></li>
-        <li class="reveal"><b>Vegan done properly</b><span>Bean, dhall and mix veg curries built on their own base.</span></li>
-      </ul>
+      <p class="eyebrow reveal">Our story</p>
+      <h2 class="sec-title reveal">Durban recipes, Pretoria East kitchen</h2>
+      <p class="reveal">4 Chilli Indian Takeaway was founded in 2011 to fill a gap: there was no authentic, traditional Durban-style curry, masala or Indian spice in Pretoria East. We set out to cook it properly, with carefully roasted masalas and spices, fresh rotis, a variety of samoosas and, of course, the bunny chows.</p>
+      <p class="reveal">Everything at 418 Jacqueline Drive is made to order. That takes a little longer, but it means every dish reaches you fresh, never from under a heat lamp. Our samoosas are fried and served immediately.</p>
+      <p class="reveal">We also keep a steady stock of premium masalas, authentic spices and quality frozen foods, so the full range is always on the shelf.</p>
     </div>
 
-    <div class="story__spice">
-      <div class="jar" data-parallax="0.02"><span>Masala</span></div>
-      <div class="jar" data-parallax="0.04"><span>Jeera</span></div>
-      <div class="jar" data-parallax="0.05"><span>Elachi</span></div>
-      <div class="jar" data-parallax="0.03"><span>Curry leaf</span></div>
-    </div>
+    <ul class="points">
+      <li class="point reveal">
+        <span class="point__n">01</span>
+        <b>Cooked to order</b>
+        <span>Nothing pre-plated, nothing reheated.</span>
+      </li>
+      <li class="point reveal">
+        <span class="point__n">02</span>
+        <b>Take away only</b>
+        <span>WhatsApp or call ahead, then collect. We don't deliver.</span>
+      </li>
+      <li class="point reveal">
+        <span class="point__n">03</span>
+        <b>Vegan done properly</b>
+        <span>Bean, dhall and mixed veg curries built on their own base.</span>
+      </li>
+    </ul>
   </div>
 </section>
 
 <!-- ══ Grocery store ══ -->
-<section class="section grocery paper" id="grocery">
-  <div class="wrap">
-    <header class="sec-head sec-head--center">
-      <p class="eyebrow reveal"><span class="eyebrow__pip"></span> More than a take away</p>
-      <h2 class="sec-title reveal">A full Indian <span class="script">grocery store</span></h2>
-      <p class="sec-sub reveal">
-        The other half of the shop. Everything you need to cook the same food at home —
-        pantry staples, fresh produce and the spice wall we cook off ourselves.
-      </p>
-    </header>
+<section class="section section--alt" id="grocery">
+  <div class="wrap grocery__grid">
+    <div>
+      <header class="sec-head">
+        <p class="eyebrow reveal">More than a take away</p>
+        <h2 class="sec-title reveal">A full Indian grocery store</h2>
+        <p class="sec-sub reveal">The other half of the shop. Everything you need to cook the same food at home: pantry staples, fresh produce and the spice wall we cook from ourselves.</p>
+      </header>
 
-    <ul class="shelf">
-      <li class="shelf__item reveal"><b>Spices &amp; masalas</b><span>Whole and ground, blended in-house. The same masala that goes into our curries.</span></li>
-      <li class="shelf__item reveal"><b>Basmati rice</b><span>By the bag, in every size.</span></li>
-      <li class="shelf__item reveal"><b>Pickles &amp; atchars</b><span>Mango, lemon, chilli and mixed.</span></li>
-      <li class="shelf__item reveal"><b>Sweetmeats</b><span>Barfi, jalebi, ladoo and the rest of the mithai counter.</span></li>
-      <li class="shelf__item reveal"><b>Indian snacks</b><span>Chevro, sev, chilli bites and things to nibble.</span></li>
-      <li class="shelf__item reveal"><b>Frozen delicacies</b><span>Fresh chickens (Cornish and culls), lamb tripe, lamb trotters, dry fish and fish roes, to name a few.</span></li>
-      <li class="shelf__item reveal"><b>Fruit &amp; vegetables</b><span>Stockists of fresh ginger, garlic, up-to-date potatoes, coriander and jam tomatoes, when available.</span></li>
-      <li class="shelf__item reveal"><b>Dhall &amp; lentils</b><span>Every kind, loose or bagged.</span></li>
-    </ul>
+      <ul class="shelf">
+        <li class="shelf__item"><b>Spices &amp; masalas</b><span>Whole and ground, blended in-house. The same masala that goes into our curries.</span></li>
+        <li class="shelf__item"><b>Basmati rice</b><span>By the bag, in every size.</span></li>
+        <li class="shelf__item"><b>Pickles &amp; atchars</b><span>Mango, lemon, chilli and mixed.</span></li>
+        <li class="shelf__item"><b>Sweetmeats</b><span>Barfi, jalebi, ladoo and the rest of the mithai counter.</span></li>
+        <li class="shelf__item"><b>Indian snacks</b><span>Chevro, sev, chilli bites and things to nibble.</span></li>
+        <li class="shelf__item"><b>Frozen delicacies</b><span>Fresh chickens (Cornish and culls), lamb tripe, lamb trotters, dry fish and fish roes, to name a few.</span></li>
+        <li class="shelf__item"><b>Fruit &amp; vegetables</b><span>Fresh ginger, garlic, potatoes, coriander and jam tomatoes, when available.</span></li>
+        <li class="shelf__item"><b>Dhall &amp; lentils</b><span>Every kind, loose or bagged.</span></li>
+      </ul>
+    </div>
 
     <figure class="grocery__shot reveal">
       <img src="img/spice-wall.jpg" alt="Rows of large glass jars on the 4 Chilli counter, chalk-labelled Kashmiri Chilli Powder, Kashmiri Masala, Mother in Law Hot Masala, Medium Masala and Smoked Paprika"
            loading="lazy" decoding="async" width="1200" height="838" />
-      <figcaption>The spice wall — ground and blended in-house</figcaption>
+      <figcaption>The spice wall, ground and blended in-house. The grocery keeps the same hours as the kitchen.</figcaption>
     </figure>
-
-    <p class="grocery__foot reveal">Pop in and browse — the grocery side keeps the same hours as the kitchen.</p>
   </div>
 </section>
 
 <!-- ══ Visit ══ -->
-<section class="section visit" id="visit">
+<section class="section" id="visit">
   <div class="wrap visit__grid">
     <div class="visit__info">
-      <p class="eyebrow reveal"><span class="eyebrow__pip"></span> Find us</p>
-      <h2 class="sec-title reveal">Come <span class="script">collect</span></h2>
+      <p class="eyebrow reveal">Find us</p>
+      <h2 class="sec-title reveal">Come collect</h2>
 
       <div class="status reveal" id="openStatus">
         <span class="status__dot"></span>
@@ -335,20 +280,20 @@
         <span class="muted">Near Faerie Glen Hospital · Pretoria</span>
       </address>
 
-      <div class="visit__contacts">
-        <a class="contact contact--wa reveal" href="https://wa.me/27837864410" target="_blank" rel="noopener">
+      <div class="contacts">
+        <a class="contact contact--wa" href="https://wa.me/27837864410" target="_blank" rel="noopener">
           <span class="contact__k">WhatsApp orders</span>
           <span class="contact__v">083 786 4410</span>
         </a>
-        <a class="contact reveal" href="tel:+27127717863">
+        <a class="contact" href="tel:+27127717863">
           <span class="contact__k">Landline</span>
           <span class="contact__v">012 771 7863</span>
         </a>
-        <a class="contact reveal" href="tel:+27609006947">
+        <a class="contact" href="tel:+27609006947">
           <span class="contact__k">Cell</span>
           <span class="contact__v">060 900 6947</span>
         </a>
-        <a class="contact reveal" href="tel:+27761050707">
+        <a class="contact" href="tel:+27761050707">
           <span class="contact__k">Alternative cell</span>
           <span class="contact__v">076 105 0707</span>
         </a>
@@ -358,14 +303,14 @@
         <caption class="sr-only">Trading hours</caption>
         <tbody></tbody>
       </table>
-      <ul class="hours__notes reveal">
-        <li>Kitchen closes <b>30 minutes</b> before the shop — last food orders half an hour before closing time.</li>
+      <ul class="notes reveal">
+        <li>The kitchen closes <b>30 minutes</b> before the shop, so last food orders are half an hour before closing.</li>
         <li>Closed on public holidays.</li>
-        <li><b>WhatsApp orders only. No deliveries</b> — collection from the shop.</li>
+        <li><b>WhatsApp orders only, no deliveries.</b> Collection from the shop.</li>
       </ul>
 
       <div class="visit__actions reveal">
-        <a class="btn btn--flame" href="https://www.google.com/maps/search/?api=1&query=418+Jacqueline+Drive+Garsfontein+Pretoria" target="_blank" rel="noopener">Get directions</a>
+        <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=418+Jacqueline+Drive+Garsfontein+Pretoria" target="_blank" rel="noopener">Get directions</a>
         <a class="btn btn--ghost" href="https://wa.me/27837864410" target="_blank" rel="noopener">WhatsApp us</a>
       </div>
     </div>
@@ -385,25 +330,19 @@
 <footer class="footer">
   <div class="wrap footer__grid">
     <div class="footer__brand">
-      <a href="#top" class="mark mark--stack">
-        <img class="mark__chilli" src="img/chillies.png" alt="" width="111" height="220" />
-        <span class="mark__type">
-          <span class="mark__num">4</span>
-          <span class="mark__word">Chilli</span>
-          <span class="mark__style">Durban Style</span>
-          <span class="mark__sub">Indian Take Away &amp; Spicebar</span>
-          <span class="mark__since">Since 2011</span>
-        </span>
-        <img class="mark__chilli mark__chilli--green" src="img/chillies-green.png" alt="" width="148" height="234" />
+      <a href="#top" class="brand" aria-label="4 Chilli — back to top">
+        <img class="brand__chilli" src="img/chillies.png" alt="" width="111" height="220" />
+        <span class="brand__word">4 Chilli</span>
+        <span class="brand__tag">Durban Style</span>
       </a>
-      <p>418 Jacqueline Drive, Garsfontein, Pretoria</p>
+      <p>Indian take away &amp; spice bar.<br />418 Jacqueline Drive, Garsfontein, Pretoria.</p>
     </div>
     <nav class="footer__links" aria-label="Footer">
       <h4>Menu</h4>
-      <a href="#menu" data-jump="curry-rice">Curry &amp; Rice</a>
+      <a href="#menu" data-jump="curry-rice">Curry &amp; rice</a>
       <a href="#menu" data-jump="breyanis">Breyanis</a>
-      <a href="#menu" data-jump="bunny-chows">Bunny Chows</a>
-      <a href="#menu" data-jump="roti-rolls">Roti Rolls</a>
+      <a href="#menu" data-jump="bunny-chows">Bunny chows</a>
+      <a href="#menu" data-jump="roti-rolls">Roti rolls</a>
       <a href="#menu" data-jump="samoosas">Samoosas</a>
     </nav>
     <nav class="footer__links" aria-label="Company">
@@ -415,7 +354,7 @@
     </nav>
     <div class="footer__cta">
       <h4>Order now</h4>
-      <a class="btn btn--flame btn--block" href="tel:+27127717863">Call 012 771 7863</a>
+      <a class="btn btn--primary btn--block" href="tel:+27127717863">Call 012 771 7863</a>
       <a class="btn btn--ghost btn--block" href="https://wa.me/27837864410" target="_blank" rel="noopener">WhatsApp us</a>
     </div>
   </div>
@@ -427,7 +366,8 @@
 
 <!-- ══ Order tray ══ -->
 <button class="tray-fab" id="trayFab" aria-label="Open your order" hidden>
-  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 12H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 7h12l-1 12H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+  <span class="tray-fab__label">Your order</span>
   <span class="tray-fab__count" id="trayCount">0</span>
 </button>
 
@@ -442,7 +382,7 @@
   <div class="tray__items" id="trayItems"></div>
   <footer class="tray__foot">
     <div class="tray__total"><span>Estimated total</span><b id="trayTotal">R0</b></div>
-    <a class="btn btn--flame btn--block is-disabled" id="trayWhatsapp" aria-disabled="true"
+    <a class="btn btn--primary btn--block is-disabled" id="trayWhatsapp" aria-disabled="true"
        target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.16c-.24.68-1.42 1.3-1.95 1.35-.5.05-.98.24-3.3-.69-2.78-1.1-4.55-3.94-4.69-4.12-.14-.19-1.12-1.49-1.12-2.85s.71-2.02.97-2.3c.25-.27.55-.34.73-.34l.53.01c.17 0 .4-.06.62.48.24.57.8 1.98.87 2.12.07.14.12.31.02.5-.1.19-.15.31-.29.47l-.44.51c-.14.14-.29.3-.13.58.17.29.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.42.29.14.45.12.62-.07.17-.19.71-.83.9-1.12.19-.29.38-.24.64-.14.26.09 1.66.78 1.95.92.29.14.48.22.55.34.07.12.07.69-.17 1.36Z"/></svg>
       Send order on WhatsApp
@@ -450,7 +390,7 @@
     <button class="tray__copy" id="trayCopy" type="button">Copy order as text</button>
     <a class="btn btn--ghost btn--block" href="tel:+27127717863">Rather call the shop</a>
     <button class="tray__clear" id="trayClear">Clear order</button>
-    <p class="tray__note">Collection only — we don't deliver. This opens WhatsApp with your order already typed; you still press send. Your order is only confirmed once the kitchen replies.</p>
+    <p class="tray__note">Collection only, we don't deliver. This opens WhatsApp with your order already typed; you still press send. Your order is only confirmed once the kitchen replies.</p>
   </footer>
 </aside>
 <div class="scrim" id="scrim"></div>
@@ -465,9 +405,9 @@
     <h3 class="modal__title" id="sentTitle">Order sent to WhatsApp</h3>
     <p class="modal__body" id="sentBody">
       Please wait for the kitchen to confirm. <b>If you don't hear back within
-      5&nbsp;minutes, call the shop</b> — your order isn't confirmed until we reply.
+      5&nbsp;minutes, call the shop</b>. Your order isn't confirmed until we reply.
     </p>
-    <a class="btn btn--flame btn--block" href="tel:+27127717863">Call 012 771 7863</a>
+    <a class="btn btn--primary btn--block" href="tel:+27127717863">Call 012 771 7863</a>
     <button class="btn btn--ghost btn--block" type="button" id="sentClose">Got it</button>
   </div>
 </div>
@@ -475,7 +415,7 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <button class="totop" id="toTop" aria-label="Back to top">
-  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
 </button>
 
 <script src="js/menu-data.js"></script>
