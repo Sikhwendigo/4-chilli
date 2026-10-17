@@ -1,0 +1,6 @@
+# Local-only files — keep them out of the public deployment
+server.js
+*.md
+.claude/
+node_modules/
+.vscode/
