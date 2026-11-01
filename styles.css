@@ -626,6 +626,8 @@ button.mprice.just-added { animation: stampIn .4s var(--ease); }
 .modal__icon svg { width: 44px; margin: 0 auto; fill: var(--red); color: var(--red); }
 .modal__title { font: 900 2rem/.95 var(--font); font-stretch: var(--condensed); text-transform: uppercase; }
 .modal__body { margin-bottom: .4rem; font-size: .95rem; color: var(--ink-2); }
+.modal__ref { font: 500 .78rem/1 var(--mono); text-transform: uppercase; color: var(--muted); }
+.modal__ref b { display: block; margin-top: .4rem; font: 600 1.9rem/1 var(--mono); letter-spacing: .04em; color: var(--red); text-transform: none; }
 
 .toast {
   position: fixed; left: 50%; bottom: 1.5rem; z-index: 140;

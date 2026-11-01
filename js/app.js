@@ -326,6 +326,41 @@ let orderText = '';   // plain-text order, shared by WhatsApp + copy fallback
 
 try { order = JSON.parse(localStorage.getItem(STORE)) || []; } catch { order = []; }
 
+/* Order reference: a short code (time + two letters, e.g. 1418-KX) that appears in the
+   WhatsApp message, the docket and the sent notice. The owner confirms "#1418-KX" and
+   both sides know which order is meant. It stays fixed while the customer edits the
+   basket, and a basket left for hours, or edited after sending, gets a fresh one. */
+const REF_STORE = '4chilli.ref.v1';
+const REF_TTL = 6 * 60 * 60 * 1000;
+let orderRef = null;
+try {
+  const r = JSON.parse(localStorage.getItem(REF_STORE));
+  if (r && Date.now() - r.at < REF_TTL) orderRef = r;
+} catch { orderRef = null; }
+
+function saveRef() {
+  try {
+    if (orderRef) localStorage.setItem(REF_STORE, JSON.stringify(orderRef));
+    else localStorage.removeItem(REF_STORE);
+  } catch { /* private mode */ }
+}
+function resetRef() { orderRef = null; saveRef(); }
+
+function currentRef() {
+  if (!orderRef || Date.now() - orderRef.at > REF_TTL) {
+    const d = new Date();
+    const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ';   // no I or O: easy to read out over the phone
+    const pick = () => letters[Math.floor(Math.random() * letters.length)];
+    const hhmm = String(d.getHours()).padStart(2, '0') + String(d.getMinutes()).padStart(2, '0');
+    orderRef = { code: `${hhmm}-${pick()}${pick()}`, at: Date.now(), sent: false };
+    saveRef();
+  }
+  return orderRef.code;
+}
+
+/* any change after the order was sent is a new order, so it gets a new reference */
+function touchRef() { if (orderRef && orderRef.sent) resetRef(); }
+
 function save() {
   try { localStorage.setItem(STORE, JSON.stringify(order)); } catch { /* private mode */ }
 }
@@ -342,8 +377,9 @@ function renderTray() {
   fab.hidden = count === 0;
   $('#trayCount').textContent = count;
   $('#trayTotal').textContent = money(Math.round(total * 100) / 100);
+  if (!count) resetRef();
   $('#trayMeta').textContent = count
-    ? `${count} item${count > 1 ? 's' : ''} · collection only`
+    ? `Order #${currentRef()} · ${count} item${count > 1 ? 's' : ''}`
     : 'Nothing added yet';
 
   $('#trayItems').innerHTML = order.length ? order.map((o, i) => `
@@ -392,12 +428,13 @@ function buildMessage(total) {
 
   const full = order.map(o =>
     `• ${o.qty} x ${itemLabel(o)}${o.size ? ` (${o.size})` : ''} - ${money2(o)}`).join('\n');
-  let msg = `Hi 4 Chilli, I'd like to order:\n\n${full}${tail}`;
+  const head = `Hi 4 Chilli, I'd like to place order #${currentRef()}:`;
+  let msg = `${head}\n\n${full}${tail}`;
 
   if (encodeURIComponent(msg).length > 1500) {
     const lean = order.map(o =>
       `${o.qty}x ${itemLabel(o)}${o.size ? ` (${o.size})` : ''}`).join('\n');
-    msg = `Hi 4 Chilli, I'd like to order:\n\n${lean}${tail}`;
+    msg = `${head}\n\n${lean}${tail}`;
   }
   return msg;
 }
@@ -413,6 +450,7 @@ function syncPriceButtons() {
 }
 
 function addItem(key, size, price, btn) {
+  touchRef();
   const found = order.find(o => o.key === key && o.size === size);
   if (found) found.qty++;
   else order.push({ key, size, price, qty: 1 });
@@ -434,6 +472,7 @@ body.addEventListener('click', (e) => {
 
 $('#trayItems').addEventListener('click', (e) => {
   const inc = e.target.closest('[data-inc]'), dec = e.target.closest('[data-dec]');
+  if (inc || dec) touchRef();
   if (inc) order[+inc.dataset.inc].qty++;
   else if (dec) {
     const i = +dec.dataset.dec;
@@ -458,6 +497,9 @@ $('#trayClear').addEventListener('click', () => { order = []; renderTray(); open
    Otherwise: let the link open WhatsApp, then show the "wait 5 minutes" notice. */
 $('#trayWhatsapp').addEventListener('click', (e) => {
   if (!order.length) { e.preventDefault(); toast('Add something to your order first'); return; }
+  $('#sentRef').textContent = '#' + currentRef();
+  orderRef.sent = true;
+  saveRef();
   setTimeout(() => openModal(true), 800);   // after the hand-off to WhatsApp
 });
 
