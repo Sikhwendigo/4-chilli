@@ -23,6 +23,24 @@ In the **WhatsApp Business** app: **Settings → Business tools → Quick replie
 | `/out` | Sorry, we're out of ____ today. Would you like ____ instead? We'll hold your order until you reply. |
 | `/closed` | Sorry, the kitchen has closed for food orders today. We open again at ____. You're welcome to send your order then! |
 
+## No WhatsApp Business yet?
+
+Quick replies, labels and away messages only exist in the free **WhatsApp Business** app. To switch, keeping the same number (083 786 4410) and its chats:
+
+1. In normal WhatsApp, back up your chats: **Settings → Chats → Chat backup**.
+2. Install **WhatsApp Business** from the App Store or Play Store.
+3. Enter the same number; it offers to move the account and chats across.
+4. Add the shop name, address, hours and logo as the profile.
+
+A number can only be on one of the two apps at a time, so if it's also your personal number, your personal chats move too.
+
+**Staying on normal WhatsApp?** Use your phone keyboard's text shortcuts instead of quick replies. Type the shortcut and the full message appears:
+
+- **iPhone:** Settings → General → Keyboard → Text Replacement → **+**
+- **Android (Gboard):** Settings → Dictionary → Personal dictionary → **+**
+
+Use the messages from the table above, with shortcuts like `okk`, `rdyy`, `busyy`. Swipe-to-reply still quotes the order number. Labels and the automatic away message aren't available in normal WhatsApp.
+
 ## Keep track with labels (optional)
 
 **Settings → Business tools → Labels**, then long-press a chat to label it:
