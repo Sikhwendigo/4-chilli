@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 350 470" width="350" height="470">
+  <!-- 4 Chilli mark concept: four chillies (two red, two green) forming the numeral 4 -->
+  <defs>
+    <!-- one chilli, lying horizontally: stem end at x=0, tip at x≈200 -->
+    <symbol id="chilli-red" viewBox="-30 -30 240 70" overflow="visible">
+      <path d="M18,-4 C72,-26 150,-20 203,12 C150,9 73,24 18,25 C5,25 -2,16 0,10 C2,2 9,-3 18,-4Z" fill="#d7261e" style="stroke:var(--gap,#f2ebdf);stroke-width:7;paint-order:stroke;stroke-linejoin:round"/>
+      <path d="M42,-2 C84,-13 131,-11 171,2" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="4" stroke-linecap="round"/>
+      <path d="M25,-8 C14,-15 1,-10 -3,4 C1,17 14,27 25,29 C19,16 19,5 25,-8Z" fill="#2e7d32"/>
+      <path d="M0,8 C-12,6 -22,-2 -26,-16" fill="none" stroke="#2e7d32" stroke-width="7" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="chilli-green" viewBox="-30 -30 240 70" overflow="visible">
+      <path d="M18,-4 C72,-26 150,-20 203,12 C150,9 73,24 18,25 C5,25 -2,16 0,10 C2,2 9,-3 18,-4Z" fill="#2e7d32" style="stroke:var(--gap,#f2ebdf);stroke-width:7;paint-order:stroke;stroke-linejoin:round"/>
+      <path d="M42,-2 C84,-13 131,-11 171,2" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="4" stroke-linecap="round"/>
+      <path d="M25,-8 C14,-15 1,-10 -3,4 C1,17 14,27 25,29 C19,16 19,5 25,-8Z" fill="#1b5e20"/>
+      <path d="M0,8 C-12,6 -22,-2 -26,-16" fill="none" stroke="#1b5e20" stroke-width="7" stroke-linecap="round"/>
+    </symbol>
+    <!-- the "4": diagonal, upper stem, crossbar, lower stem — four chillies -->
+    <symbol id="four" viewBox="-10 -24 350 470">
+      <g transform="translate(190,30) rotate(127.6) scale(1.24)"><use href="#chilli-red" width="240" height="70" x="-30" y="-30"/></g>
+      <g transform="translate(262,236) rotate(180) scale(1.1)"><use href="#chilli-red" width="240" height="70" x="-30" y="-30"/></g>
+      <g transform="translate(206,24) rotate(90) scale(.95)"><use href="#chilli-green" width="240" height="70" x="-30" y="-30"/></g>
+      <g transform="translate(184,420) rotate(-90) scale(.82)"><use href="#chilli-green" width="240" height="70" x="-30" y="-30"/></g>
+    </symbol>
+  </defs>
+  <use href="#four" width="350" height="470"/>
+</svg>
