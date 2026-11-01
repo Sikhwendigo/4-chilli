@@ -136,6 +136,8 @@ ul, ol { list-style: none; }
 .brand { display: inline-flex; align-items: center; gap: .1rem; font: 900 1.85rem/1 var(--font); font-stretch: var(--condensed); text-transform: uppercase; }
 .brand__4 { color: var(--red); margin-right: .12em; }
 .brand__chilli { width: 12px; height: auto; margin-left: .35rem; transform: rotate(18deg); }
+/* the shop's original logo in the header: red "4 Chilli" with its red and green chillies */
+.brand--logo img { display: block; width: auto; height: 58px; }
 
 .nav__links { display: flex; align-items: center; gap: .2rem; }
 .nav__links a[data-nav] {
