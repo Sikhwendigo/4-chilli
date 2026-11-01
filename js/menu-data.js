@@ -229,7 +229,8 @@ const MENU = [
           { name: 'Carrot Salad', diet: 'vegan', heat: 1, prices: [20, 35, 45] },
           { name: 'Dhall', diet: 'vegan', heat: 1, prices: [29, 55, 75] },
           { name: 'Chicken Strips & Chips', note: 'kiddies', diet: 'meat', heat: 0, prices: [49, null, null] },
-          { name: 'Roti & Pappadum', note: 'each', diet: 'veg', heat: 0, prices: [9.5, null, null] }
+          { name: 'Roti', note: 'each', diet: 'veg', heat: 0, prices: [9.5, null, null] },
+          { name: 'Pappadum', note: 'each', diet: 'veg', heat: 0, prices: [9.5, null, null] }
         ]
       }
     ]

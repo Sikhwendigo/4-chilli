@@ -14,16 +14,8 @@ const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ─────────────────────────────────────────── Preloader */
-window.addEventListener('load', () => {
-  setTimeout(() => $('#preloader').classList.add('is-done'), reduced ? 0 : 450);
-});
-
-/* ─────────────────────────────────────────── Hero word stagger */
-$$('.hero__title .word').forEach((w, i) => w.style.setProperty('--i', i));
-
 /* ─────────────────────────────────────────── Reveal on scroll */
-const revealables = '.reveal, .card, .jar, .contact, .story__points li, .shelf__item';
+const revealables = '.reveal, .card, .contact, .shelf__item';
 function armReveal(root = document) {
   $$(revealables, root).forEach(el => {
     if (el.hasAttribute('data-rev')) return;
@@ -71,23 +63,9 @@ const spyIO = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '-45% 0px -50% 0px' });
 
-/* ─────────────────────────────────────────── Scroll loop (progress, parallax, chrome) */
+/* ─────────────────────────────────────────── Scroll loop (progress, chrome) */
 const toTop = $('#toTop');
 let ticking = false;
-
-/* Parallax positions are measured ONCE (and on resize), never per frame.
-   Reading getBoundingClientRect() inside the scroll handler forces a layout
-   on every frame, and because the rect already includes the transform we
-   just wrote, the offset compounds into itself. Cache the untransformed
-   document offset instead and derive everything from scrollY. */
-let parallax = [];
-function measureParallax() {
-  parallax = $$('[data-parallax]').map(el => {
-    el.style.transform = '';
-    const r = el.getBoundingClientRect();
-    return { el, factor: +el.dataset.parallax || 0, mid: r.top + window.scrollY + r.height / 2 };
-  });
-}
 
 function onScroll() {
   const y = window.scrollY;
@@ -97,26 +75,10 @@ function onScroll() {
   nav.classList.toggle('is-stuck', y > 24);
   navProgress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
   toTop.classList.toggle('is-on', y > vh * 0.9);
-
-  if (!reduced) {
-    const centre = y + vh / 2;
-    for (const p of parallax) {
-      const offset = p.mid - centre;
-      // skip anything well outside the viewport — nothing to see, no work to do
-      if (offset > vh * 1.5 || offset < -vh * 1.5) continue;
-      p.el.style.transform = `translate3d(0, ${(-offset * p.factor).toFixed(1)}px, 0)`;
-    }
-  }
   ticking = false;
 }
 window.addEventListener('scroll', () => {
   if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
-}, { passive: true });
-
-let resizeT;
-window.addEventListener('resize', () => {
-  clearTimeout(resizeT);
-  resizeT = setTimeout(() => { measureParallax(); onScroll(); }, 150);
 }, { passive: true });
 
 toTop.addEventListener('click', () =>
@@ -138,27 +100,28 @@ const countIO = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.6 });
 
-/* ─────────────────────────────────────────── Heat dots */
+/* ─────────────────────────────────────────── Heat rating: up to four chillies */
 const heatDots = (n, cls = '') =>
   `<span class="heat ${cls}" title="Heat ${n} of 4" aria-label="Heat level ${n} of 4">` +
-  [0, 1, 2, 3].map(i => `<i class="${i < n ? 'on' : ''}"></i>`).join('') +
+  [0, 1, 2, 3].map(i => `<svg viewBox="0 0 64 64" class="${i < n ? 'on' : ''}" aria-hidden="true"><use href="#i-chilli"/></svg>`).join('') +
   `</span>`;
 
 /* ─────────────────────────────────────────── Signature cards */
-$('#signatureCards').innerHTML = SIGNATURES.map(s => `
+$('#signatureCards').innerHTML = SIGNATURES.map((s, i) => `
   <article class="card">
     <div class="card__media">
+      <span class="card__n">${String(i + 1).padStart(2, '0')}</span>
       <img src="${esc(s.img)}" alt="${esc(s.alt)}" loading="lazy" decoding="async" width="800" height="600" />
       <span class="card__tag">${esc(s.tag)}</span>
-      <h3 class="card__name">${esc(s.name)}</h3>
     </div>
     <div class="card__body">
+      <h3 class="card__name">${esc(s.name)}</h3>
       <p class="card__desc">${esc(s.desc)}</p>
       <div class="card__foot">
         <span class="card__from"><small>From</small>${money(s.from)}</span>
         ${heatDots(s.heat, 'heat--lg')}
         <a class="card__go" href="#menu" data-jump="${s.jump}" aria-label="See ${esc(s.name)} on the menu">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg>
         </a>
       </div>
     </div>
@@ -303,7 +266,9 @@ $$('.filters .chip').forEach(chip => {
 function jumpTo(id) {
   const el = $('#sec-' + id);
   if (!el) return;
-  const top = el.getBoundingClientRect().top + window.scrollY - (74 + 72);
+  // clear the sticky nav and the sticky section rail, measured rather than hard-coded
+  const offset = nav.offsetHeight + $('.railwrap').offsetHeight + 12;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
   window.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' });
 }
 
@@ -361,6 +326,41 @@ let orderText = '';   // plain-text order, shared by WhatsApp + copy fallback
 
 try { order = JSON.parse(localStorage.getItem(STORE)) || []; } catch { order = []; }
 
+/* Order reference: a short code (time + two letters, e.g. 1418-KX) that appears in the
+   WhatsApp message, the docket and the sent notice. The owner confirms "#1418-KX" and
+   both sides know which order is meant. It stays fixed while the customer edits the
+   basket, and a basket left for hours, or edited after sending, gets a fresh one. */
+const REF_STORE = '4chilli.ref.v1';
+const REF_TTL = 6 * 60 * 60 * 1000;
+let orderRef = null;
+try {
+  const r = JSON.parse(localStorage.getItem(REF_STORE));
+  if (r && Date.now() - r.at < REF_TTL) orderRef = r;
+} catch { orderRef = null; }
+
+function saveRef() {
+  try {
+    if (orderRef) localStorage.setItem(REF_STORE, JSON.stringify(orderRef));
+    else localStorage.removeItem(REF_STORE);
+  } catch { /* private mode */ }
+}
+function resetRef() { orderRef = null; saveRef(); }
+
+function currentRef() {
+  if (!orderRef || Date.now() - orderRef.at > REF_TTL) {
+    const d = new Date();
+    const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ';   // no I or O: easy to read out over the phone
+    const pick = () => letters[Math.floor(Math.random() * letters.length)];
+    const hhmm = String(d.getHours()).padStart(2, '0') + String(d.getMinutes()).padStart(2, '0');
+    orderRef = { code: `${hhmm}-${pick()}${pick()}`, at: Date.now(), sent: false };
+    saveRef();
+  }
+  return orderRef.code;
+}
+
+/* any change after the order was sent is a new order, so it gets a new reference */
+function touchRef() { if (orderRef && orderRef.sent) resetRef(); }
+
 function save() {
   try { localStorage.setItem(STORE, JSON.stringify(order)); } catch { /* private mode */ }
 }
@@ -377,8 +377,9 @@ function renderTray() {
   fab.hidden = count === 0;
   $('#trayCount').textContent = count;
   $('#trayTotal').textContent = money(Math.round(total * 100) / 100);
+  if (!count) resetRef();
   $('#trayMeta').textContent = count
-    ? `${count} item${count > 1 ? 's' : ''} · collection only`
+    ? `Order #${currentRef()} · ${count} item${count > 1 ? 's' : ''}`
     : 'Nothing added yet';
 
   $('#trayItems').innerHTML = order.length ? order.map((o, i) => `
@@ -427,12 +428,13 @@ function buildMessage(total) {
 
   const full = order.map(o =>
     `• ${o.qty} x ${itemLabel(o)}${o.size ? ` (${o.size})` : ''} - ${money2(o)}`).join('\n');
-  let msg = `Hi 4 Chilli, I'd like to order:\n\n${full}${tail}`;
+  const head = `Hi 4 Chilli, I'd like to place order #${currentRef()}:`;
+  let msg = `${head}\n\n${full}${tail}`;
 
   if (encodeURIComponent(msg).length > 1500) {
     const lean = order.map(o =>
       `${o.qty}x ${itemLabel(o)}${o.size ? ` (${o.size})` : ''}`).join('\n');
-    msg = `Hi 4 Chilli, I'd like to order:\n\n${lean}${tail}`;
+    msg = `${head}\n\n${lean}${tail}`;
   }
   return msg;
 }
@@ -448,6 +450,7 @@ function syncPriceButtons() {
 }
 
 function addItem(key, size, price, btn) {
+  touchRef();
   const found = order.find(o => o.key === key && o.size === size);
   if (found) found.qty++;
   else order.push({ key, size, price, qty: 1 });
@@ -469,6 +472,7 @@ body.addEventListener('click', (e) => {
 
 $('#trayItems').addEventListener('click', (e) => {
   const inc = e.target.closest('[data-inc]'), dec = e.target.closest('[data-dec]');
+  if (inc || dec) touchRef();
   if (inc) order[+inc.dataset.inc].qty++;
   else if (dec) {
     const i = +dec.dataset.dec;
@@ -493,6 +497,9 @@ $('#trayClear').addEventListener('click', () => { order = []; renderTray(); open
    Otherwise: let the link open WhatsApp, then show the "wait 5 minutes" notice. */
 $('#trayWhatsapp').addEventListener('click', (e) => {
   if (!order.length) { e.preventDefault(); toast('Add something to your order first'); return; }
+  $('#sentRef').textContent = '#' + currentRef();
+  orderRef.sent = true;
+  saveRef();
   setTimeout(() => openModal(true), 800);   // after the hand-off to WhatsApp
 });
 
@@ -624,9 +631,6 @@ spySections.forEach(id => { const el = $('#' + id); if (el) spyIO.observe(el); }
 $$('.msec').forEach(s => railIO.observe(s));
 $$('.count').forEach(el => countIO.observe(el));
 renderTray();
-measureParallax();
 onScroll();
-/* images settling can shift the page — re-measure once everything has loaded */
-window.addEventListener('load', () => { measureParallax(); onScroll(); });
 
 })();

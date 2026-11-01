@@ -4,3 +4,5 @@ server.js
 .claude/
 node_modules/
 .vscode/
+brand/
+design/
